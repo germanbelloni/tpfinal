@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+    {% block title %}
+        APP
+    {% endblock %}
+    
+    {% block body %}
+
+    <div class="col-md-offset-1 col-md-1">
+        <h2 class="page-header text-primary text-center">Customer Page</h2>
+        <h3 class="text-success">Welcome : {{session["username"]}}</h3>
+        <hr>
+        <a href="{{url_for('logout')}}" class="btn btn-primary btn-block">Logout</a>
+    </div>
+
+    {% endblock %}
+

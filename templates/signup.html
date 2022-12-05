@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+    {% block title %}
+        Create Account
+    {% endblock %}
+    
+    {% block body %}
+    <form action="/signup" method="POST">
+        <p>Rellena</p>
+
+        <div class="form-outline mb-4">
+            <label class="form-label" for="username">Username</label>
+            <input type="text" name="username" class="form-control" autofocus
+            placeholder="Write your username" />
+        </div>
+        
+        <div class="form-outline mb-4">
+            <label class="form-label" for="fullname">Fullname</label>
+            <input type="text" name="fullname" class="form-control" 
+            placeholder="Write your fullname" />
+        </div>
+
+        <div class="form-outline mb-4">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" name="password" class="form-control"
+            placeholder="Write your password" />
+        </div>
+
+        <div class="form-outline mb-4">
+            <label class="form-label" for="isAdmin">isAdmin</label>
+            <input type="number" name="isAdmin" class="form-control" 
+            placeholder="Admin" />
+        </div>
+
+        
+        <div class="text-center pt-1 mb-5 pb-1">
+            <button type="submit" class="btn btn-success" type="button"><a href="/login">Login</a></button>
+            
+        </div>
+        
+        
+    </form>
+    
+    {% endblock %}
+</html>
