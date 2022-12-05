@@ -1,9 +1,13 @@
 import sqlite3
 from flask import Flask, redirect, url_for, render_template, request, session
 
+app = Flask(__name__)
+app.secret_key = "r@nd0mSk_1"
+path_db = './database/tfinal.db'
+
 
 def register_user(username,fullname,password,isAdmin):
-    con = sqlite3.connect('tfinal.db')
+    con = sqlite3.connect(path_db)
     cur = con.cursor()
     cur.execute('INSERT INTO Users(Username,Fullname,Password,isAdmin) values (?,?,?,?)', (username,fullname,password,isAdmin))
     con.commit()
@@ -11,7 +15,7 @@ def register_user(username,fullname,password,isAdmin):
 
 
 def check_user(username, password):
-    con = sqlite3.connect('tfinal.db')
+    con = sqlite3.connect(path_db)
     cur = con.cursor()
     cur.execute('SELECT Username,Password FROM Users WHERE username=? and password=?', (username, password))
 
@@ -22,8 +26,7 @@ def check_user(username, password):
         return False
 
 
-app = Flask(__name__)
-app.secret_key = "r@nd0mSk_1"
+
 
 
 @app.route("/")
