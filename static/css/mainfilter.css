@@ -1,0 +1,60 @@
+body{
+    background-color: brown;
+    font-family: 'Poppins', sans-serif;
+    padding:10;
+    margin:10;  
+}
+form{
+    text-align: center;
+    padding: 10px;
+    height: 30px;
+    color: black;
+}
+.container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+}
+
+.card {
+    background-color: rgba(29, 30, 31, 0.9);
+    height: 205px;
+    width: 200px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    transition: 0.3s;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+h1{
+    color:white;
+    text-align: center;  
+}
+
+h2{
+    text-align: center;
+}
+
+h3{
+    text-align: center;
+    color:white;
+}
+
+p{
+    text-align: center;
+    color: blueviolet;
+}
+
+section{
+    padding:10px;
+}
+
+.logout{
+    padding: 10px;
+    width: 100px;
+    margin-left: 20px;
+    text-align: center;
+    background: black;    
+}

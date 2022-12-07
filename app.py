@@ -77,5 +77,43 @@ def logout():
     return redirect(url_for('index'))
 
 
+@app.route('/filter', methods=['GET', 'POST'])
+def filter():
+    con = sqlite3.connect(path_db)
+    cur = con.cursor()
+    search = f'''SELECT Album.ArtistId, Album.title, Artist.name , Track.name
+                FROM Album 
+                INNER JOIN Artist
+                ON Album.ArtistId = Artist.ArtistId
+                INNER JOIN Track ON Album.AlbumId=Track.AlbumId;
+                '''
+    cur.execute(search)
+    result = cur.fetchall()
+    
+    x = []
+
+    for artist in result:
+        data = ('id', 'album', 'artist', 'track')
+        if len(artist) == len(data):
+            res = {data[i] : artist[i] for i, _ in enumerate(artist)}
+            x.append(res)
+    print(x[0])
+            
+
+    dataFilter = []
+
+    if request.method == 'POST':
+        filter = request.form['filtering']
+        for result in x:
+            filter = filter.upper()
+            if result['album'].upper().startswith(filter) or result['artist'].upper().startswith(filter) or result['track'].upper().startswith(filter):
+
+                dataFilter.append(result)    
+    
+    print(dataFilter)
+    return render_template('main.html', x=x, dataFilter=dataFilter)
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
