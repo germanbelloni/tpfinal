@@ -97,20 +97,21 @@ def filter():
         if len(artist) == len(data):
             res = {data[i] : artist[i] for i, _ in enumerate(artist)}
             x.append(res)
-    print(x[0])
+    
             
 
     dataFilter = []
 
     if request.method == 'POST':
-        filter = request.form['filtering']
+        filter = request.form['fil']
+        
         for result in x:
             filter = filter.upper()
+            
             if result['album'].upper().startswith(filter) or result['artist'].upper().startswith(filter) or result['track'].upper().startswith(filter):
 
                 dataFilter.append(result)    
     
-    print(dataFilter)
     return render_template('main.html', x=x, dataFilter=dataFilter)
 
 

@@ -18,56 +18,35 @@
     <hr>
     <h2>Please enter what you want to search for</h2>
     <form class="form" action="/filter" method="post">
-        <input type="search" name="filtering">
+        <input type="search" name="fil">
         <button type="submit" name="ok">Search</button>
     </form>
     
     <section>
         <div class="container">
-            <!-- {% if dataFilter|length > 0 %}
-                {%if artist not in dataFilter %}
-                    <p>No existe</p>
-                {%else%}
-                    {% for artist in dataFilter %}
-                    <div class="card">
-                        <h1>{{artist['album']}}</h1>
-                        <p>Song: {{artist['track']}}</p>
-                        <p>By: {{artist['artist']}}</p>
-                    </div>
-                    {% endfor %}
-                {% endif %}    
-            {% else %}
-                {%if artist not in x%}
-                    <p>no existe</p>
-                {%else%}
-                    {% for artist in x %}
-                    <div class="card">
-                        <h1 class="h1">{{artist['album']}}</h1>
-                        <p class="par">By: {{artist['artist']}}</p>
-                    </div>
-                    {% endfor %}
-                {% endif %}    
-            {% endif %} -->
+            
             {% if dataFilter|length > 0 %}
                 
                 {% for artist in dataFilter %}
-                    {%if artist['album'] in dataFilter%}
-                        <div class="card">
-                            <h1>{{artist['album']}}</h1>
-                            <p>Song: {{artist['track']}}</p>
-                            <p>By: {{artist['artist']}}</p>
-                        </div>
-                    {%else%}  
-                        <p>no existe</p>
-                    {% endif %}
+                    
+                    <div class="card">
+                        
+                        <h1>{{artist['album']}}</h1>
+                        <p>Song: {{artist['track']}}</p>
+                        <p>From: {{artist['artist']}}</p>
+
+                    </div>
+                    
                 {% endfor %}
                 
             {% else %}
                 
                 {% for artist in x %}
                 <div class="card">
+                    
                     <h1 class="h1">{{artist['album']}}</h1>
-                    <p class="par">By: {{artist['artist']}}</p>
+                    <p class="par">From: {{artist['artist']}}</p>
+
                 </div>
                 {% endfor %}
                 
