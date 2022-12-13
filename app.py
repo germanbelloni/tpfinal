@@ -1,5 +1,7 @@
 import sqlite3
-from flask import Flask, redirect, url_for, render_template, request, session
+from flask import Flask, redirect, url_for, render_template, request, session, jsonify
+from consume import consume
+
 
 app = Flask(__name__)
 app.secret_key = "r@nd0mSk_1"
@@ -24,9 +26,6 @@ def check_user(username, password):
         return True
     else:
         return False
-
-
-
 
 
 @app.route("/")
@@ -77,8 +76,9 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/filter', methods=['GET', 'POST'])
-def filter():
+@app.route('/filter')
+def filters():
+    
     con = sqlite3.connect(path_db)
     cur = con.cursor()
     search = f'''SELECT Album.ArtistId, Album.title, Artist.name , Track.name
@@ -89,31 +89,27 @@ def filter():
                 '''
     cur.execute(search)
     result = cur.fetchall()
-    
-    x = []
+    print(result)
+    return result
 
-    for artist in result:
-        data = ('id', 'album', 'artist', 'track')
-        if len(artist) == len(data):
-            res = {data[i] : artist[i] for i, _ in enumerate(artist)}
-            x.append(res)
-    
-            
-
+@app.route('/search')
+def search():
+    filters()
+    consumer()
+    a = json.dumps(x)
+    print(a)
     dataFilter = []
 
     if request.method == 'POST':
         filter = request.form['fil']
         
-        for result in x:
+        for result in a:
             filter = filter.upper()
             
             if result['album'].upper().startswith(filter) or result['artist'].upper().startswith(filter) or result['track'].upper().startswith(filter):
 
-                dataFilter.append(result)    
-    
-    return render_template('main.html', x=x, dataFilter=dataFilter)
-
+                dataFilter.append(result)   
+    return render_template('main.html', a=a, dataFilter=dataFilter)
 
 
 if __name__ == '__main__':
